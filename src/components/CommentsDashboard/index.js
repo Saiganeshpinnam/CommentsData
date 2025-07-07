@@ -2,6 +2,8 @@ import {Component} from 'react'
 
 import {GoSearch} from 'react-icons/go'
 
+import {FaLessThan, FaGreaterThan} from 'react-icons/fa'
+
 import Header from '../Header'
 
 import CommentItem from '../CommentItem'
@@ -15,6 +17,7 @@ class CommentsDashboard extends Component {
     searchInput: '',
     sortBy: null, // 'postId', 'name', 'email'
     sortOrder: 'none', // 'asc', 'desc', 'none'
+    pageNumber: 1,
   }
 
   componentDidMount() {
@@ -102,8 +105,34 @@ class CommentsDashboard extends Component {
     })
   }
 
+  OnclickingPreviousPage = () => {
+    const {pageNumber} = this.state
+    if (pageNumber === 1) {
+      this.setState({
+        pageNumber,
+      })
+    } else {
+      this.setState(prevState => ({
+        pageNumber: prevState.pageNumber - 1,
+      }))
+    }
+  }
+
+  OnclickingNextPage = () => {
+    const {pageNumber} = this.state
+    if (pageNumber === 50) {
+      this.setState({
+        pageNumber,
+      })
+    } else {
+      this.setState(prevState => ({
+        pageNumber: prevState.pageNumber + 1,
+      }))
+    }
+  }
+
   render() {
-    const {commentsData, searchInput} = this.state
+    const {commentsData, searchInput, pageNumber} = this.state
     const searchResults = commentsData.filter(eachCommentData =>
       `${eachCommentData.name} ${eachCommentData.email} ${eachCommentData.comment}`
         .toLocaleLowerCase()
@@ -165,6 +194,18 @@ class CommentsDashboard extends Component {
               ))}
             </ul>
           </div>
+        </div>
+        <div className="pagination-container">
+          <FaLessThan
+            onClick={this.OnclickingPreviousPage}
+            className="page-controls"
+          />
+          <p className="page-number">{pageNumber}</p>
+          <p className="page-number">{pageNumber + 1}</p>
+          <FaGreaterThan
+            onClick={this.OnclickingNextPage}
+            className="page-controls"
+          />
         </div>
       </div>
     )
