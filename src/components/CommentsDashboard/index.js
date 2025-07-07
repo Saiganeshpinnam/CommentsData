@@ -41,6 +41,14 @@ class CommentsDashboard extends Component {
       <div className="bg-container">
         <Header />
         <div className="comments-bg-container">
+          <div className="filtering-container">
+            <input
+              type="search"
+              onChange={this.onChangeSearchInput}
+              className="input-container"
+            />
+          </div>
+
           <div className="comments-container">
             <div className="comments-header">
               <p className="post-section">Post ID</p>
