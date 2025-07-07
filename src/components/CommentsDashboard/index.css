@@ -13,7 +13,7 @@
 }
 .comments-container {
   height: 90%;
-  width: 80vw;
+  width: 90vw;
 }
 .comments-header {
   background-color: #d5d3e6;
@@ -31,6 +31,12 @@
   font-weight: bold;
   padding: 3px;
 }
+@media screen and (max-width: 767px) {
+  .comments-header {
+    height: 40px;
+    font-size: 10px;
+  }
+}
 .post-section {
   width: 13%;
   margin-left: 5px;
@@ -39,7 +45,7 @@
   width: 24%;
 }
 .email-section {
-  width: 27%;
+  width: 25%;
 }
 .comments-section {
   width: 38%;
@@ -63,14 +69,38 @@
   justify-content: center;
   align-items: center;
   box-shadow: #e9e4f0 1px 1px 2px 2px;
-  width: 340px;
+  width: 45%;
 }
 .search-icon {
-  height: 65%;
+  height: 25px;
+  width: 25px;
 }
 .input-element {
   height: 45px;
   border-width: 0px;
   width: 90%;
   border-color: #ffffff;
+  color: #535057;
+  font-size: 15px;
+  font-family: 'Roboto';
+}
+@media screen and (max-width: 575px) {
+  .search-icon {
+    height: 13px;
+    width: 13px;
+  }
+  .input-element {
+    height: 25px;
+    font-size: 5px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .search-icon {
+    height: 11px;
+    width: 11px;
+  }
+  .input-element {
+    height: 25px;
+    font-size: 10px;
+  }
 }

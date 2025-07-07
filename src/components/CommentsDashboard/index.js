@@ -68,6 +68,7 @@ class CommentsDashboard extends Component {
                 onChange={this.onChangeSearchInput}
                 onKeyDown={this.onClickSearchIcon}
                 className="input-element"
+                placeholder="Search name, email, comment"
               />
             </div>
           </div>

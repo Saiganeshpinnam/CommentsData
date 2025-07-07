@@ -12,6 +12,16 @@
   margin-bottom: 2px;
   padding: 2px;
 }
+@media screen and (max-width: 767px) {
+  .comment-item-container {
+    font-size: 9px;
+  }
+}
+@media screen and ((min-width: 768px) and (max-width : 991px)) {
+  .comment-item-container {
+    font-size: 13px;
+  }
+}
 
 .post-data {
   width: 10%;
@@ -19,11 +29,30 @@
   font-weight: bold;
 }
 .name-data {
-  width: 24%;
+  width: 22%;
+  margin: 3px;
 }
 .email-data {
-  width: 27%;
+  width: 25%;
+  margin: 3px;
 }
 .comments-data {
   width: 39%;
+}
+@media screen and (max-width: 575px) {
+  .post-data {
+    width: 8%;
+    margin: 1px;
+  }
+  .name-data {
+    width: 16%;
+    margin: 1px;
+  }
+  .email-data {
+    width: 40%;
+    margin: 3px;
+  }
+  .comments-data {
+    width: 42%;
+  }
 }
