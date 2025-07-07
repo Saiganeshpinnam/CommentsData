@@ -1,0 +1,13 @@
+.header-container {
+  background-color: #0d065e;
+  height: 10vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  height: 60%;
+  width: 9%;
+}

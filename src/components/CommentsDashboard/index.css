@@ -1,0 +1,51 @@
+.bg-container {
+  background-color: #ffffff;
+  height: 100vh;
+  width: 100vw;
+}
+.comments-bg-container {
+  height: 91vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.comments-container {
+  height: 90vh;
+  width: 80vw;
+}
+.comments-header {
+  background-color: #d5d3e6;
+  height: 60px;
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: #726db3;
+  font-size: 16px;
+  font-family: 'Roboto';
+  font-weight: bold;
+  padding: 3px;
+}
+.post-section {
+  width: 13%;
+  margin-left: 5px;
+}
+.name-section {
+  width: 24%;
+}
+.email-section {
+  width: 27%;
+}
+.comments-section {
+  width: 35%;
+}
+.comments-data-container {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+}
