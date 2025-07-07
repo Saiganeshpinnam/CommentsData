@@ -58,6 +58,19 @@
   align-items: center;
 }
 .input-container {
-  height: 45px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-shadow: #e9e4f0 1px 1px 2px 2px;
   width: 340px;
+}
+.search-icon {
+  height: 65%;
+}
+.input-element {
+  height: 45px;
+  border-width: 0px;
+  width: 90%;
+  border-color: #ffffff;
 }

@@ -1,5 +1,7 @@
 import {Component} from 'react'
 
+import {GoSearch} from 'react-icons/go'
+
 import Header from '../Header'
 
 import CommentItem from '../CommentItem'
@@ -9,6 +11,7 @@ import './index.css'
 class CommentsDashboard extends Component {
   state = {
     commentsData: [],
+    searchInput: '',
   }
 
   componentDidMount() {
@@ -35,18 +38,38 @@ class CommentsDashboard extends Component {
     })
   }
 
+  onClickSearchIcon = event => {
+    if (event.key === 'Enter') {
+      this.getCommentsData()
+    }
+  }
+
+  onChangeSearchInput = event => {
+    this.setState({
+      searchInput: event.target.value,
+    })
+  }
+
   render() {
-    const {commentsData} = this.state
+    const {commentsData, searchInput} = this.state
+    const searchResults = commentsData.filter(eachCommentData =>
+      eachCommentData.name.includes(searchInput),
+    )
+
     return (
       <div className="bg-container">
         <Header />
         <div className="comments-bg-container">
           <div className="filtering-container">
-            <input
-              type="search"
-              onChange={this.onChangeSearchInput}
-              className="input-container"
-            />
+            <div className="input-container">
+              <GoSearch className="search-icon" />
+              <input
+                type="search"
+                onChange={this.onChangeSearchInput}
+                onKeyDown={this.onClickSearchIcon}
+                className="input-element"
+              />
+            </div>
           </div>
 
           <div className="comments-container">
@@ -57,7 +80,7 @@ class CommentsDashboard extends Component {
               <p className="comments-section">Comment</p>
             </div>
             <ul className="comments-data-container">
-              {commentsData.map(eachItem => (
+              {searchResults.map(eachItem => (
                 <CommentItem commentData={eachItem} key={eachItem.id} />
               ))}
             </ul>
