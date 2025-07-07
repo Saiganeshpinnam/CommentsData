@@ -13,8 +13,8 @@ class CommentsDashboard extends Component {
     commentsData: [],
     originalCommentsData: [],
     searchInput: '',
-    sortBy: null,
-    sortOrder: 'none',
+    sortBy: null, // 'postId', 'name', 'email'
+    sortOrder: 'none', // 'asc', 'desc', 'none'
   }
 
   componentDidMount() {
@@ -44,7 +44,15 @@ class CommentsDashboard extends Component {
 
   onClickSearchIcon = event => {
     if (event.key === 'Enter') {
-      this.getCommentsData()
+      const {originalCommentsData, searchInput} = this.state
+      const filteredResults = originalCommentsData.filter(eachCommentData =>
+        `${eachCommentData.name} ${eachCommentData.email} ${eachCommentData.comment}`
+          .toLowerCase()
+          .includes(searchInput.toLowerCase()),
+      )
+      this.setState({
+        commentsData: filteredResults,
+      })
     }
   }
 
@@ -131,11 +139,13 @@ class CommentsDashboard extends Component {
               </button>
             </div>
             <div className="input-container">
-              <GoSearch className="search-icon" />
+              <GoSearch
+                className="search-icon"
+                onClick={this.onClickSearchIcon}
+              />
               <input
                 type="search"
                 onChange={this.onChangeSearchInput}
-                onKeyDown={this.onClickSearchIcon}
                 className="input-element"
                 placeholder="Search name, email, comment"
               />
