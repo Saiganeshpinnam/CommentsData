@@ -11,7 +11,10 @@ import './index.css'
 class CommentsDashboard extends Component {
   state = {
     commentsData: [],
+    originalCommentsData: [],
     searchInput: '',
+    sortBy: null,
+    sortOrder: 'none',
   }
 
   componentDidMount() {
@@ -35,6 +38,7 @@ class CommentsDashboard extends Component {
     }))
     this.setState({
       commentsData: formattedData,
+      originalCommentsData: formattedData,
     })
   }
 
@@ -50,19 +54,52 @@ class CommentsDashboard extends Component {
     })
   }
 
- // const sortingWays = ['no sort', 'ascending', 'descending', 'no sort']
+  getNextSortOrder = currentOrder => {
+    if (currentOrder === 'none') {
+      return 'asc'
+    }
+    if (currentOrder === 'asc') {
+      return 'desc'
+    }
+    return 'none'
+  }
 
-  onClickingSortBtn = () => {
-   const descendingOrder = commentsData.name.sort((a, b) => b - a)
-    this.setState({
-      commentsData: descendingOrder,
+  handleSort = sortKey => {
+    this.setState(prevState => {
+      const nextOrder =
+        prevState.sortBy === sortKey
+          ? this.getNextSortOrder(prevState.sortOrder)
+          : 'asc'
+      let sortedData = []
+      if (nextOrder === 'none') {
+        sortedData = prevState.originalCommentsData
+      } else {
+        sortedData = [...prevState.commentsData].sort((a, b) => {
+          const valA = a[sortKey].toString().toLowerCase()
+          const valB = b[sortKey].toString().toLowerCase()
+          if (valA < valB) {
+            return nextOrder === 'asc' ? -1 : 1
+          }
+          if (valA > valB) {
+            return nextOrder === 'asc' ? 1 : -1
+          }
+          return 0
+        })
+      }
+      return {
+        commentsData: sortedData,
+        sortBy: sortKey,
+        sortOrder: nextOrder,
+      }
     })
   }
 
   render() {
     const {commentsData, searchInput} = this.state
     const searchResults = commentsData.filter(eachCommentData =>
-      eachCommentData.name.includes(searchInput),
+      `${eachCommentData.name} ${eachCommentData.email} ${eachCommentData.comment}`
+        .toLocaleLowerCase()
+        .includes(searchInput.toLowerCase()),
     )
 
     return (
@@ -70,13 +107,29 @@ class CommentsDashboard extends Component {
         <Header />
         <div className="comments-bg-container">
           <div className="filtering-container">
-            <button
-              type="button"
-              className="sort-btn"
-              onClick={this.onClickingSortBtn}
-            >
-              Sort Name
-            </button>
+            <div className="btns-container">
+              <button
+                type="button"
+                className="sort-btn"
+                onClick={() => this.handleSort('postId')}
+              >
+                Sort Post ID
+              </button>
+              <button
+                type="button"
+                className="sort-btn"
+                onClick={() => this.handleSort('name')}
+              >
+                Sort Name
+              </button>
+              <button
+                type="button"
+                className="sort-btn"
+                onClick={() => this.handleSort('email')}
+              >
+                Sort Email
+              </button>
+            </div>
             <div className="input-container">
               <GoSearch className="search-icon" />
               <input
