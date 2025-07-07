@@ -132,12 +132,19 @@ class CommentsDashboard extends Component {
   }
 
   render() {
+    const commentsPerPage = 10
+
     const {commentsData, searchInput, pageNumber} = this.state
     const searchResults = commentsData.filter(eachCommentData =>
       `${eachCommentData.name} ${eachCommentData.email} ${eachCommentData.comment}`
         .toLocaleLowerCase()
         .includes(searchInput.toLowerCase()),
     )
+
+    const totalPages = Math.ceil(searchResults.length / commentsPerPage)
+    const startIndex = (pageNumber - 1) * commentsPerPage
+    const endIndex = startIndex + commentsPerPage
+    const paginatedResults = searchResults.slice(startIndex, endIndex)
 
     return (
       <div className="bg-container">
@@ -189,23 +196,27 @@ class CommentsDashboard extends Component {
               <p className="comments-section">Comment</p>
             </div>
             <ul className="comments-data-container">
-              {searchResults.map(eachItem => (
+              {paginatedResults.map(eachItem => (
                 <CommentItem commentData={eachItem} key={eachItem.id} />
               ))}
             </ul>
           </div>
         </div>
         <div className="pagination-container">
-          <FaLessThan
-            onClick={this.OnclickingPreviousPage}
-            className="page-controls"
-          />
-          <p className="page-number">{pageNumber}</p>
-          <p className="page-number">{pageNumber + 1}</p>
-          <FaGreaterThan
-            onClick={this.OnclickingNextPage}
-            className="page-controls"
-          />
+          <div className="pagination-elements">
+            <FaLessThan
+              onClick={this.OnclickingPreviousPage}
+              className="page-controls"
+            />
+            <p className="active-page page-number">{pageNumber}</p>
+            {pageNumber < totalPages && (
+              <p className="page-number">{pageNumber + 1}</p>
+            )}
+            <FaGreaterThan
+              onClick={this.OnclickingNextPage}
+              className="page-controls"
+            />
+          </div>
         </div>
       </div>
     )

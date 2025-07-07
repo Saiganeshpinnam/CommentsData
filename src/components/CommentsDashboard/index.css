@@ -126,11 +126,29 @@
 .pagination-container {
   display: flex;
   flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  width: 80vw;
+}
+.pagination-elements {
+  display: flex;
+  flex-direction: row;
   justify-content: space-around;
   align-items: center;
   height: 50px;
   width: 9%;
 }
-.page-controls{
+.page-controls {
   cursor: pointer;
+}
+.active-page {
+  border-style: solid;
+  border-width: 2px;
+  border-color: #111a14;
+}
+.page-number{
+  color: #111a14;
+  font-size: 17px;
+  font-family: 'Roboto';
+  padding: 3px;
 }
