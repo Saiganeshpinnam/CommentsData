@@ -50,6 +50,15 @@ class CommentsDashboard extends Component {
     })
   }
 
+ // const sortingWays = ['no sort', 'ascending', 'descending', 'no sort']
+
+  onClickingSortBtn = () => {
+   const descendingOrder = commentsData.name.sort((a, b) => b - a)
+    this.setState({
+      commentsData: descendingOrder,
+    })
+  }
+
   render() {
     const {commentsData, searchInput} = this.state
     const searchResults = commentsData.filter(eachCommentData =>
@@ -61,6 +70,13 @@ class CommentsDashboard extends Component {
         <Header />
         <div className="comments-bg-container">
           <div className="filtering-container">
+            <button
+              type="button"
+              className="sort-btn"
+              onClick={this.onClickingSortBtn}
+            >
+              Sort Name
+            </button>
             <div className="input-container">
               <GoSearch className="search-icon" />
               <input
