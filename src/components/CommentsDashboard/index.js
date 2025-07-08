@@ -190,9 +190,9 @@ class CommentsDashboard extends Component {
   }
 
   onSelectingOption = event => {
-    let selectedOption = event.target.value
+    const selectedOption = event.target.value
     let number = ''
-    for (let i = 0; i < selectedOption.length; i++) {
+    for (let i = 0; i < selectedOption.length; i += 1) {
       if (
         parseInt(selectedOption[i]) >= 0 &&
         parseInt(selectedOption[i]) <= 9
@@ -200,7 +200,7 @@ class CommentsDashboard extends Component {
         number += selectedOption[i]
       }
     }
-    let userSelectedPages = parseInt(number)
+    const userSelectedPages = parseInt(number)
     this.setState({
       commentsCountPerPage: userSelectedPages,
     })

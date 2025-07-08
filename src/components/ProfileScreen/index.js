@@ -118,7 +118,9 @@ class ProfileScreen extends Component {
             <div className="category-container">
               <p className="category-label">Address</p>
               <div className="category-value-container">
-                <p className="category-value">{userStreet}</p>
+                <p className="category-value">
+                  {userSuite},{userStreet},{userCity}
+                </p>
               </div>
             </div>
           </div>
