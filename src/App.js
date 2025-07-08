@@ -1,5 +1,7 @@
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 
+import Header from './components/Header'
+
 import CommentsDashboard from './components/CommentsDashboard'
 
 import ProfileScreen from './components/ProfileScreen'

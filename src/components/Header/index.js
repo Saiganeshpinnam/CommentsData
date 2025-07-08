@@ -1,8 +1,17 @@
 import './index.css'
 
 const Header = props => {
-  const {profilesData} = props
-  console.log(profilesData.name)
+  const {userData} = props
+  if (!userData) {
+    return null
+  }
+  const {name} = userData
+  console.log(name)
+  const fullName = name.split(' ')
+  const firstName = fullName[0]?.[0] || ''
+  const lastName = fullName[1]?.[0] || ''
+  console.log(firstName)
+  console.log(lastName)
   return (
     <div className="header-container">
       <img
@@ -10,6 +19,13 @@ const Header = props => {
         alt="swift-logo"
         className="logo"
       />
+      <div className="user-name-container">
+        <div className="profile-pic-container">
+          <p className="user-initial">{firstName}</p>
+          <p className="user-initial">{lastName}</p>
+        </div>
+        <p className="user-name">{name}</p>
+      </div>
     </div>
   )
 }

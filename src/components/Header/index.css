@@ -6,15 +6,37 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding: 7px;
 }
 .logo {
-  height: 60%;
+  height: 65%;
   width: 13%;
 }
-.profile-container {
-  width: 35%;
+.user-name-container {
+  width: 11%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+}
+.profile-pic-container {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.user-initial {
+  font-size: 15px;
+  font-weight: bold;
+  color: #0a170d;
+  font-family: 'Roboto';
+}
+.user-name {
+  font-size: 15px;
+  color: #ffffff;
+  font-family: 'Roboto';
 }

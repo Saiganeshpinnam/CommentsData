@@ -8,9 +8,9 @@ import {GoSearch} from 'react-icons/go'
 
 import {FaLessThan, FaGreaterThan} from 'react-icons/fa'
 
-import Header from '../Header'
-
 import CommentItem from '../CommentItem'
+
+import Header from '../Header'
 
 import './index.css'
 
@@ -23,10 +23,11 @@ class CommentsDashboard extends Component {
     sortOrder: 'none', // 'asc', 'desc', 'none'
     pageNumber: 1,
     isLoading: true,
+    userData: null,
   }
 
   componentDidMount() {
-    this.getCommentsData()
+    this.getCommentsData(), this.getUserData()
   }
 
   getCommentsData = async () => {
@@ -48,6 +49,14 @@ class CommentsDashboard extends Component {
       commentsData: formattedData,
       originalCommentsData: formattedData,
       isLoading: false,
+    })
+  }
+
+  getUserData = async () => {
+    const response = await fetch('https://jsonplaceholder.typicode.com/users')
+    const data = await response.json()
+    this.setState({
+      userData: data[0],
     })
   }
 
@@ -140,7 +149,7 @@ class CommentsDashboard extends Component {
   render() {
     const commentsPerPage = 10
 
-    const {commentsData, searchInput, pageNumber, isLoading} = this.state
+    const {commentsData, searchInput, pageNumber, isLoading, userData} = this.state
 
     const searchResults = commentsData.filter(eachCommentData =>
       `${eachCommentData.name} ${eachCommentData.email} ${eachCommentData.comment}`
@@ -155,7 +164,7 @@ class CommentsDashboard extends Component {
 
     return (
       <div className="bg-container">
-        <Header />
+        <Header userData={userData}/>
         <div className="comments-bg-container">
           <div className="filtering-container">
             <div className="btns-container">

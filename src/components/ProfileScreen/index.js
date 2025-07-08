@@ -32,7 +32,7 @@ class ProfileScreen extends Component {
       email: eachProfile.email,
       phone: eachProfile.phone,
       street: eachProfile.address.street,
-      suit: eachProfile.address.suit,
+      suite: eachProfile.address.suite,
       city: eachProfile.address.city,
     }))
     this.setState({
@@ -49,7 +49,7 @@ class ProfileScreen extends Component {
 
   renderProfileData = () => {
     const {profilesData} = this.state
-    return <Header profilesData={profilesData[0]} />
+    return <Header userData={profilesData[0]} />
   }
 
   render() {
