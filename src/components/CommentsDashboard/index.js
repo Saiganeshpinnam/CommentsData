@@ -22,6 +22,7 @@ class CommentsDashboard extends Component {
     sortBy: null, // 'postId', 'name', 'email'
     sortOrder: 'none', // 'asc', 'desc', 'none'
     pageNumber: 1,
+    commentsCountPerPage: 10,
     isLoading: true,
     userData: null,
   }
@@ -188,15 +189,31 @@ class CommentsDashboard extends Component {
     }
   }
 
-  render() {
-    const commentsPerPage = 10
+  onSelectingOption = event => {
+    let selectedOption = event.target.value
+    let number = ''
+    for (let i = 0; i < selectedOption.length; i++) {
+      if (
+        parseInt(selectedOption[i]) >= 0 &&
+        parseInt(selectedOption[i]) <= 9
+      ) {
+        number += selectedOption[i]
+      }
+    }
+    let userSelectedPages = parseInt(number)
+    this.setState({
+      commentsCountPerPage: userSelectedPages,
+    })
+  }
 
+  render() {
     const {
       commentsData,
       searchInput,
       pageNumber,
       isLoading,
       userData,
+      commentsCountPerPage,
     } = this.state
 
     const searchResults = commentsData.filter(eachCommentData =>
@@ -205,9 +222,9 @@ class CommentsDashboard extends Component {
         .includes(searchInput.toLowerCase()),
     )
 
-    const totalPages = Math.ceil(searchResults.length / commentsPerPage)
-    const startIndex = (pageNumber - 1) * commentsPerPage
-    const endIndex = startIndex + commentsPerPage
+    const totalPages = Math.ceil(searchResults.length / commentsCountPerPage)
+    const startIndex = (pageNumber - 1) * commentsCountPerPage
+    const endIndex = startIndex + commentsCountPerPage
     const paginatedResults = searchResults.slice(startIndex, endIndex)
 
     return (
@@ -287,6 +304,11 @@ class CommentsDashboard extends Component {
               className="page-controls"
             />
           </div>
+          <select onChange={this.onSelectingOption}>
+            <option className="page-option">10/Page</option>
+            <option className="page-option">50/Page</option>
+            <option className="page-option">100/Page</option>
+          </select>
         </div>
       </div>
     )
