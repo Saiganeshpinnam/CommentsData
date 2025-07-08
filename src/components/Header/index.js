@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom'
+
 import './index.css'
 
 const Header = props => {
@@ -6,12 +8,12 @@ const Header = props => {
     return null
   }
   const {name} = userData
-  console.log(name)
+  //  console.log(name)
   const fullName = name.split(' ')
   const firstName = fullName[0]?.[0] || ''
   const lastName = fullName[1]?.[0] || ''
-  console.log(firstName)
-  console.log(lastName)
+  //  console.log(firstName)
+  // console.log(lastName)
   return (
     <div className="header-container">
       <img
@@ -19,13 +21,13 @@ const Header = props => {
         alt="swift-logo"
         className="logo"
       />
-      <div className="user-name-container">
+      <Link to="/profile-screen" className="user-name-container">
         <div className="profile-pic-container">
           <p className="user-initial">{firstName}</p>
           <p className="user-initial">{lastName}</p>
         </div>
         <p className="user-name">{name}</p>
-      </div>
+      </Link>
     </div>
   )
 }

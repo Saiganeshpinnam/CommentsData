@@ -18,6 +18,7 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  text-decoration: none;
 }
 .profile-pic-container {
   height: 40px;

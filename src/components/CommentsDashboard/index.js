@@ -149,7 +149,8 @@ class CommentsDashboard extends Component {
   render() {
     const commentsPerPage = 10
 
-    const {commentsData, searchInput, pageNumber, isLoading, userData} = this.state
+    const {commentsData, searchInput, pageNumber, isLoading, userData} =
+      this.state
 
     const searchResults = commentsData.filter(eachCommentData =>
       `${eachCommentData.name} ${eachCommentData.email} ${eachCommentData.comment}`
@@ -164,7 +165,7 @@ class CommentsDashboard extends Component {
 
     return (
       <div className="bg-container">
-        <Header userData={userData}/>
+        <Header userData={userData} />
         <div className="comments-bg-container">
           <div className="filtering-container">
             <div className="btns-container">

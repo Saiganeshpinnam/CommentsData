@@ -1,8 +1,12 @@
 import {Component} from 'react'
 
+import {Link} from 'react-router-dom'
+
 import Loader from 'react-loader-spinner'
 
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
+
+import {GoArrowLeft} from 'react-icons/go'
 
 import './index.css'
 
@@ -23,9 +27,9 @@ class ProfileScreen extends Component {
       'https://jsonplaceholder.typicode.com/users',
     )
     const statusCode = await profileResponse.statusCode
-    console.log(statusCode)
+    //  console.log(statusCode)
     const profileJsonResponse = await profileResponse.json()
-    console.log(profileJsonResponse)
+    //  console.log(profileJsonResponse)
     const formattedProfileData = profileJsonResponse.map(eachProfile => ({
       id: eachProfile.id,
       name: eachProfile.name,
@@ -49,15 +53,29 @@ class ProfileScreen extends Component {
 
   renderProfileData = () => {
     const {profilesData} = this.state
-    return <Header userData={profilesData[0]} />
+    
+
+    return (
+      <div className="welcome-user-container">
+        <div className="back-container">
+          <Link to="/">
+            <GoArrowLeft className="back-icon" />
+          </Link>
+          <p>Welcome, {profilesData[0].name}</p>
+        </div>
+      </div>
+    )
   }
 
   render() {
-    const {isLoading} = this.state
+    const {isLoading, profilesData} = this.state
 
     return (
       <div className="profile-bg-container">
-        {isLoading ? this.renderLoadingView() : this.renderProfileData()}
+        <Header userData={profilesData[0]} />
+        <div className="profile-section-bg">
+          {isLoading ? this.renderLoadingView() : this.renderProfileData()}
+        </div>
       </div>
     )
   }

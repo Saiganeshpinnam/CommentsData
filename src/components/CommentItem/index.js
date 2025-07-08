@@ -2,7 +2,7 @@ import './index.css'
 
 const CommentItem = props => {
   const {commentData} = props
-  const {id, postId, name, email, comment} = commentData
+  const {postId, name, email, comment} = commentData
   return (
     <li className="comment-item-container">
       <p className="post-data">{postId}</p>

@@ -1,0 +1,19 @@
+.profile-section-bg {
+  height: 100vh;
+  width: 100vw;
+}
+.welcome-user-container {
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+}
+.back-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.back-icon {
+  height: 24px;
+  width: 35px;
+}
