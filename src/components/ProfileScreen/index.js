@@ -27,7 +27,7 @@ class ProfileScreen extends Component {
       'https://jsonplaceholder.typicode.com/users',
     )
     const statusCode = await profileResponse.statusCode
-    //  console.log(statusCode)
+    console.log(statusCode)
     const profileJsonResponse = await profileResponse.json()
     //  console.log(profileJsonResponse)
     const formattedProfileData = profileJsonResponse.map(eachProfile => ({
@@ -53,15 +53,22 @@ class ProfileScreen extends Component {
 
   renderProfileData = () => {
     const {profilesData} = this.state
-    
-
+    const user = profilesData[0]
+    const userName = (user.name)
+    const userId = user.id 
+    const userEmail = user.email 
+    const userPhone = user.phone 
+    const street = user.street 
+    const suite = user.suite 
+    const city = user.city
     return (
       <div className="welcome-user-container">
         <div className="back-container">
           <Link to="/">
             <GoArrowLeft className="back-icon" />
           </Link>
-          <p>Welcome, {profilesData[0].name}</p>
+          <p className="welcome-greet">Welcome, {profilesData[0].name}</p>
+          
         </div>
       </div>
     )
