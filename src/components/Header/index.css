@@ -11,8 +11,8 @@
   height: 60%;
   width: 13%;
 }
-.profile-container{
-  width :35%;
+.profile-container {
+  width: 35%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
