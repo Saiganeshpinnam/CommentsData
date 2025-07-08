@@ -28,9 +28,13 @@ class CommentsDashboard extends Component {
 
   componentDidMount() {
     const savedPage = localStorage.getItem('pageNumber')
+    const savedSortedOrder = localStorage.getItem('sortOrder')
+    const savedSortBy = localStorage.getItem('sortBy')
     this.setState(
       {
         pageNumber: savedPage ? JSON.parse(savedPage) : 1,
+        sortOrder: savedSortedOrder ? JSON.parse(savedSortedOrder) : 'none',
+        sortBy: savedSortBy ? JSON.parse(savedSortBy) : null,
       },
       () => {
         this.getCommentsData()
@@ -40,9 +44,15 @@ class CommentsDashboard extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const {pageNumber} = this.state
+    const {pageNumber, sortOrder, sortBy} = this.state
     if (prevState.pageNumber !== pageNumber) {
       localStorage.setItem('pageNumber', JSON.stringify(pageNumber))
+    }
+    if (prevState.sortOrder !== sortOrder) {
+      localStorage.setItem('sortOrder', JSON.stringify(sortOrder))
+    }
+    if (prevState.sortBy !== sortBy) {
+      localStorage.setItem('sortBy', JSON.stringify(sortBy))
     }
   }
 
@@ -61,8 +71,23 @@ class CommentsDashboard extends Component {
       email: eachComment.email,
       comment: eachComment.body,
     }))
+    const {sortBy, sortOrder} = this.state
+    const sortedData = [...formattedData]
+    if (sortOrder !== 'none' && sortBy) {
+      sortedData.sort((a, b) => {
+        const valA = a[sortBy] ? a[sortBy].toString().toLowerCase() : ''
+        const valB = b[sortBy] ? b[sortBy].toString().toLowerCase() : ''
+        if (valA < valB) {
+          return sortOrder === 'asc' ? -1 : 1
+        }
+        if (valA > valB) {
+          return sortOrder === 'asc' ? 1 : -1
+        }
+        return 0
+      })
+    }
     this.setState({
-      commentsData: formattedData,
+      commentsData: sortedData,
       originalCommentsData: formattedData,
       isLoading: false,
     })
