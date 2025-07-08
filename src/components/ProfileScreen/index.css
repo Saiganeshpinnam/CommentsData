@@ -1,11 +1,16 @@
 .profile-section-bg {
-  height: 100vh;
+ 
   width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .welcome-user-container {
   width: 80vw;
   display: flex;
   flex-direction: column;
+  
 }
 .back-container {
   display: flex;
@@ -17,8 +22,13 @@
   height: 24px;
   width: 35px;
 }
-.welcome-greet{
+.welcome-greet {
   font-size: 18px;
   color: #1a0545;
   font-family: 'Roboto';
+}
+.user-profile-container {
+  box-shadow: #e9e4f0 1px 1px 1px 2px;
+  height: 450px;
+  width: 80vw;
 }

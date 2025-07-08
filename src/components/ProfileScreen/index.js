@@ -54,12 +54,12 @@ class ProfileScreen extends Component {
   renderProfileData = () => {
     const {profilesData} = this.state
     const user = profilesData[0]
-    const userName = (user.name)
-    const userId = user.id 
-    const userEmail = user.email 
-    const userPhone = user.phone 
-    const street = user.street 
-    const suite = user.suite 
+    const userName = user.name
+    const userId = user.id
+    const userEmail = user.email
+    const userPhone = user.phone
+    const street = user.street
+    const suite = user.suite
     const city = user.city
     return (
       <div className="welcome-user-container">
@@ -68,8 +68,8 @@ class ProfileScreen extends Component {
             <GoArrowLeft className="back-icon" />
           </Link>
           <p className="welcome-greet">Welcome, {profilesData[0].name}</p>
-          
         </div>
+        <div className="user-profile-container"></div>
       </div>
     )
   }
