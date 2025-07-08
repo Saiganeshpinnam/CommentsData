@@ -143,3 +143,22 @@
   font-weight: bold;
   font-family: 'Roboto';
 }
+@media screen and (max-width: 767px) {
+  .data-categories-container {
+    height: 170px;
+  }
+  .category-container {
+    margin: 3px;
+  }
+  .category-label {
+    font-size: 8px;
+  }
+  .category-value-container {
+    height: 16px;
+
+    padding: 2px;
+  }
+  .category-value {
+    font-size: 7px;
+  }
+}
