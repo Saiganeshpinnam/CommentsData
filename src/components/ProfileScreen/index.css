@@ -1,5 +1,4 @@
 .profile-section-bg {
- 
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -10,7 +9,6 @@
   width: 80vw;
   display: flex;
   flex-direction: column;
-  
 }
 .back-container {
   display: flex;
@@ -31,4 +29,117 @@
   box-shadow: #e9e4f0 1px 1px 1px 2px;
   height: 450px;
   width: 80vw;
+  padding: 30px;
+}
+.profile-pic-name-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 160px;
+}
+@media screen and (max-width: 767px) {
+  .back-icon {
+    height: 15px;
+    width: 25px;
+  }
+  .welcome-greet {
+    font-size: 9px;
+  }
+  .user-profile-container {
+    height: 300px;
+  }
+}
+.profile-pic-container {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: #dfdce6;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.user-initial {
+  font-size: 15px;
+  font-weight: bold;
+  color: #0a170d;
+  font-family: 'Roboto';
+}
+.name-mail-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.profile-name {
+  color: #1d044f;
+  font-size: 14px;
+  font-family: 'Roboto';
+  margin: 0px;
+}
+.profile-mail {
+  color: #b6b3bd;
+  font-size: 10px;
+  font-family: 'Roboto';
+  margin: 0px;
+  align-self: flex-start;
+}
+@media screen and (max-width: 575px) {
+  .profile-pic-name-container {
+    width: 90px;
+  }
+  .profile-pic-container {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+  }
+  .user-initial {
+    font-size: 10px;
+  }
+  .profile-name {
+    font-size: 7px;
+  }
+  .profile-mail {
+    font-size: 6px;
+  }
+}
+.data-categories-container {
+  height: 300px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.category-container {
+  width: 46%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+}
+.category-label {
+  color: #54515c;
+  font-size: 15px;
+  font-family: 'Roboto';
+  align-self: flex-start;
+}
+.category-value-container {
+  height: 30px;
+  width: 100%;
+  background-color: #eeebf5;
+  padding: 4px;
+  border-radius: 1px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.category-value {
+  color: #2c2c2e;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: 'Roboto';
 }

@@ -58,9 +58,19 @@ class ProfileScreen extends Component {
     const userId = user.id
     const userEmail = user.email
     const userPhone = user.phone
-    const street = user.street
-    const suite = user.suite
-    const city = user.city
+    const userStreet = user.street
+    const userSuite = user.suite
+    const userCity = user.city
+
+    if (!user) {
+      return null
+    }
+    const {name} = user
+    //  console.log(name)
+    const fullName = name.split(' ')
+    const firstName = fullName[0]?.[0] || ''
+    const lastName = fullName[1]?.[0] || ''
+
     return (
       <div className="welcome-user-container">
         <div className="back-container">
@@ -69,7 +79,50 @@ class ProfileScreen extends Component {
           </Link>
           <p className="welcome-greet">Welcome, {profilesData[0].name}</p>
         </div>
-        <div className="user-profile-container"></div>
+        <div className="user-profile-container">
+          <div className="profile-pic-name-container">
+            <div className="profile-pic-container">
+              <p className="user-initial">{firstName}</p>
+              <p className="user-initial">{lastName}</p>
+            </div>
+            <div className="name-mail-container">
+              <p className="profile-name">{userName}</p>
+              <p className="profile-mail">{userEmail}</p>
+            </div>
+          </div>
+          <div className="data-categories-container">
+            <div className="category-container">
+              <p className="category-label">User ID</p>
+              <div className="category-value-container">
+                <p className="category-value">{userId}</p>
+              </div>
+            </div>
+            <div className="category-container">
+              <p className="category-label">Emalil ID</p>
+              <div className="category-value-container">
+                <p className="category-value">{userEmail}</p>
+              </div>
+            </div>
+            <div className="category-container">
+              <p className="category-label"> Phone </p>
+              <div className="category-value-container">
+                <p className="category-value">{userPhone}</p>
+              </div>
+            </div>
+            <div className="category-container">
+              <p className="category-label">Name</p>
+              <div className="category-value-container">
+                <p className="category-value">{userName}</p>
+              </div>
+            </div>
+            <div className="category-container">
+              <p className="category-label">Address</p>
+              <div className="category-value-container">
+                <p className="category-value">{userStreet}</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

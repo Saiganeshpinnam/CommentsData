@@ -41,3 +41,19 @@
   color: #ffffff;
   font-family: 'Roboto';
 }
+@media screen and (max-width: 767px) {
+  .user-name-container {
+    width: 14%;
+  }
+  .profile-pic-container {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+  }
+  .user-initial {
+    font-size: 6px;
+  }
+  .user-name {
+    font-size: 7px;
+  }
+}
