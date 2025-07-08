@@ -27,7 +27,23 @@ class CommentsDashboard extends Component {
   }
 
   componentDidMount() {
-    this.getCommentsData(), this.getUserData()
+    const savedPage = localStorage.getItem('pageNumber')
+    this.setState(
+      {
+        pageNumber: savedPage ? JSON.parse(savedPage) : 1,
+      },
+      () => {
+        this.getCommentsData()
+        this.getUserData()
+      },
+    )
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const {pageNumber} = this.state
+    if (prevState.pageNumber !== pageNumber) {
+      localStorage.setItem('pageNumber', JSON.stringify(pageNumber))
+    }
   }
 
   getCommentsData = async () => {
@@ -112,6 +128,7 @@ class CommentsDashboard extends Component {
           return 0
         })
       }
+
       return {
         commentsData: sortedData,
         sortBy: sortKey,
@@ -149,8 +166,13 @@ class CommentsDashboard extends Component {
   render() {
     const commentsPerPage = 10
 
-    const {commentsData, searchInput, pageNumber, isLoading, userData} =
-      this.state
+    const {
+      commentsData,
+      searchInput,
+      pageNumber,
+      isLoading,
+      userData,
+    } = this.state
 
     const searchResults = commentsData.filter(eachCommentData =>
       `${eachCommentData.name} ${eachCommentData.email} ${eachCommentData.comment}`
