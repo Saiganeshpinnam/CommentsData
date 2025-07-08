@@ -1,5 +1,9 @@
 import {Component} from 'react'
 
+import Loader from 'react-loader-spinner'
+
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
+
 import './index.css'
 
 import Header from '../Header'
@@ -7,6 +11,7 @@ import Header from '../Header'
 class ProfileScreen extends Component {
   state = {
     profilesData: [],
+    isLoading: true,
   }
 
   componentDidMount() {
@@ -32,17 +37,27 @@ class ProfileScreen extends Component {
     }))
     this.setState({
       profilesData: formattedProfileData,
+      isLoading: false,
     })
   }
 
-  render() {
+  renderLoadingView = () => (
+    <div data-testid="loader">
+      <Loader type="TailSpin" color="#00bfff" height={50} width={50} />
+    </div>
+  )
+
+  renderProfileData = () => {
     const {profilesData} = this.state
-    const userData = profilesData[0]
-    const {id, name} = userData
-    console.log(name)
+    return <Header profilesData={profilesData[0]} />
+  }
+
+  render() {
+    const {isLoading} = this.state
+
     return (
       <div className="profile-bg-container">
-        <Header profilesData={profilesData[0]} />
+        {isLoading ? this.renderLoadingView() : this.renderProfileData()}
       </div>
     )
   }

@@ -141,6 +141,7 @@ class CommentsDashboard extends Component {
     const commentsPerPage = 10
 
     const {commentsData, searchInput, pageNumber, isLoading} = this.state
+
     const searchResults = commentsData.filter(eachCommentData =>
       `${eachCommentData.name} ${eachCommentData.email} ${eachCommentData.comment}`
         .toLocaleLowerCase()

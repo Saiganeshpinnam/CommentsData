@@ -2,7 +2,7 @@ import './index.css'
 
 const Header = props => {
   const {profilesData} = props
-  // console.log(profilesData)
+  console.log(profilesData.name)
   return (
     <div className="header-container">
       <img
@@ -10,7 +10,6 @@ const Header = props => {
         alt="swift-logo"
         className="logo"
       />
-      <div className="profile-container" />
     </div>
   )
 }
