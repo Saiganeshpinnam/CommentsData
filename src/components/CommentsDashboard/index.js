@@ -1,5 +1,9 @@
 import {Component} from 'react'
 
+import Loader from 'react-loader-spinner'
+
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
+
 import {GoSearch} from 'react-icons/go'
 
 import {FaLessThan, FaGreaterThan} from 'react-icons/fa'
@@ -18,6 +22,7 @@ class CommentsDashboard extends Component {
     sortBy: null, // 'postId', 'name', 'email'
     sortOrder: 'none', // 'asc', 'desc', 'none'
     pageNumber: 1,
+    isLoading: true,
   }
 
   componentDidMount() {
@@ -42,6 +47,7 @@ class CommentsDashboard extends Component {
     this.setState({
       commentsData: formattedData,
       originalCommentsData: formattedData,
+      isLoading: false,
     })
   }
 
@@ -134,7 +140,7 @@ class CommentsDashboard extends Component {
   render() {
     const commentsPerPage = 10
 
-    const {commentsData, searchInput, pageNumber} = this.state
+    const {commentsData, searchInput, pageNumber, isLoading} = this.state
     const searchResults = commentsData.filter(eachCommentData =>
       `${eachCommentData.name} ${eachCommentData.email} ${eachCommentData.comment}`
         .toLocaleLowerCase()
@@ -188,19 +194,25 @@ class CommentsDashboard extends Component {
             </div>
           </div>
 
-          <div className="comments-container">
-            <div className="comments-header">
-              <p className="post-section">Post ID</p>
-              <p className="name-section">Name</p>
-              <p className="email-section">Email</p>
-              <p className="comments-section">Comment</p>
+          {isLoading ? (
+            <div data-testid="loader">
+              <Loader type="TailSpin" color="#00bfff" height={50} width={50} />
             </div>
-            <ul className="comments-data-container">
-              {paginatedResults.map(eachItem => (
-                <CommentItem commentData={eachItem} key={eachItem.id} />
-              ))}
-            </ul>
-          </div>
+          ) : (
+            <div className="comments-container">
+              <div className="comments-header">
+                <p className="post-section">Post ID</p>
+                <p className="name-section">Name</p>
+                <p className="email-section">Email</p>
+                <p className="comments-section">Comment</p>
+              </div>
+              <ul className="comments-data-container">
+                {paginatedResults.map(eachItem => (
+                  <CommentItem commentData={eachItem} key={eachItem.id} />
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
         <div className="pagination-container">
           <div className="pagination-elements">
