@@ -31,11 +31,13 @@ class CommentsDashboard extends Component {
     const savedPage = localStorage.getItem('pageNumber')
     const savedSortedOrder = localStorage.getItem('sortOrder')
     const savedSortBy = localStorage.getItem('sortBy')
+    const savedSearchInput = localStorage.getItem('searchInput')
     this.setState(
       {
         pageNumber: savedPage ? JSON.parse(savedPage) : 1,
         sortOrder: savedSortedOrder ? JSON.parse(savedSortedOrder) : 'none',
         sortBy: savedSortBy ? JSON.parse(savedSortBy) : null,
+        searchInput: savedSearchInput || '',
       },
       () => {
         this.getCommentsData()
@@ -72,10 +74,17 @@ class CommentsDashboard extends Component {
       email: eachComment.email,
       comment: eachComment.body,
     }))
-    const {sortBy, sortOrder} = this.state
-    const sortedData = [...formattedData]
+    const {sortBy, sortOrder, searchInput} = this.state
+    let filteredData = formattedData
+    if (searchInput) {
+      filteredData = formattedData.filter(eachComment =>
+        `${eachComment.name} ${eachComment.email} ${eachComment.comment}`
+          .toLowerCase()
+          .includes(searchInput.toLowerCase()),
+      )
+    }
     if (sortOrder !== 'none' && sortBy) {
-      sortedData.sort((a, b) => {
+      filteredData.sort((a, b) => {
         const valA = a[sortBy] ? a[sortBy].toString().toLowerCase() : ''
         const valB = b[sortBy] ? b[sortBy].toString().toLowerCase() : ''
         if (valA < valB) {
@@ -88,7 +97,7 @@ class CommentsDashboard extends Component {
       })
     }
     this.setState({
-      commentsData: sortedData,
+      commentsData: filteredData,
       originalCommentsData: formattedData,
       isLoading: false,
     })
@@ -102,17 +111,22 @@ class CommentsDashboard extends Component {
     })
   }
 
-  onClickSearchIcon = event => {
+  onClickSearchIcon = () => {
+    const {originalCommentsData, searchInput} = this.state
+    const filteredResults = originalCommentsData.filter(eachCommentData =>
+      `${eachCommentData.name} ${eachCommentData.email} ${eachCommentData.comment}`
+        .toLowerCase()
+        .includes(searchInput.toLowerCase()),
+    )
+    this.setState({
+      commentsData: filteredResults,
+      pageNumber: 1,
+    })
+  }
+
+  onKeyDownSearch = event => {
     if (event.key === 'Enter') {
-      const {originalCommentsData, searchInput} = this.state
-      const filteredResults = originalCommentsData.filter(eachCommentData =>
-        `${eachCommentData.name} ${eachCommentData.email} ${eachCommentData.comment}`
-          .toLowerCase()
-          .includes(searchInput.toLowerCase()),
-      )
-      this.setState({
-        commentsData: filteredResults,
-      })
+      this.onClickSearchIcon()
     }
   }
 
@@ -120,6 +134,7 @@ class CommentsDashboard extends Component {
     this.setState({
       searchInput: event.target.value,
     })
+    localStorage.setItem('searchInput', event.target.value)
   }
 
   getNextSortOrder = currentOrder => {
@@ -216,11 +231,7 @@ class CommentsDashboard extends Component {
       commentsCountPerPage,
     } = this.state
 
-    const searchResults = commentsData.filter(eachCommentData =>
-      `${eachCommentData.name} ${eachCommentData.email} ${eachCommentData.comment}`
-        .toLocaleLowerCase()
-        .includes(searchInput.toLowerCase()),
-    )
+    const searchResults = commentsData
 
     const totalPages = Math.ceil(searchResults.length / commentsCountPerPage)
     const startIndex = (pageNumber - 1) * commentsCountPerPage
@@ -262,7 +273,9 @@ class CommentsDashboard extends Component {
               />
               <input
                 type="search"
+                value={searchInput}
                 onChange={this.onChangeSearchInput}
+                onKeyDown={this.onKeyDownSearch}
                 className="input-element"
                 placeholder="Search name, email, comment"
               />
